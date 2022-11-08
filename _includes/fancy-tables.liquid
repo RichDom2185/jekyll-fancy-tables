@@ -4,7 +4,12 @@
 {% capture newline %}
 {% endcapture %}
 {% assign starts = '|--;|:-' | split: ';' %}
-{%- assign nodes = include.html
+{% if include.markdown %}
+  {% assign html = include.markdown | markdownify %}
+{% else %}
+  {% assign html = include.html %}
+{% endif %}
+{%- assign nodes = html
   | strip
   | split: '<pre><code class="language-'
 -%}
