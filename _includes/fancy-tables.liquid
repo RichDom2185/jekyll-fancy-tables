@@ -54,12 +54,20 @@
             {% for cell in cells offset:1 %}
               {% assign cleaned = cell | replace: '\', '' %}
               {% assign col_span = cell.size | minus: cleaned.size | plus: 1 %}
+              {% assign cleaned = cleaned | strip %}
+              {% if cleaned == '^^' %}{% continue %}{% endif %}
 
               {% assign lookbelow_index = forloop.parentloop.index | plus: offset %}
               {% assign next_row_cells = lines[lookbelow_index] | replace: '\', '|' | strip | split: '|' %}
-              {% assign cell_below = next_row_cells[col_index] %}
-              <td colspan="{{ col_span }}">
-                {{ cleaned | strip }}
+              {% assign cell_below = next_row_cells[col_index] | strip %}
+              {% if cell_below == '^^' %}
+                {% comment %} TODO: Support more than 2 row spans {% endcomment %}
+                {% assign row_span = 2 %}
+              {% else %}
+                {% assign row_span = 1 %}
+              {% endif %}
+              <td colspan="{{ col_span }}" rowspan="{{ row_span }}">
+                {{ cleaned }}
               </td>
               {% assign col_index = col_index | plus: col_span %}
             {% endfor %}
