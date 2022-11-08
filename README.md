@@ -10,3 +10,31 @@ Benefits:
 
 * Fully compatible with GitHub Pages
 * Easily customisable to your needs
+
+## Usage
+
+Simply include it in any of the layouts you want to add support for:
+
+**Recommended:** Reassign the layout's `content` variable. This approach ensures compatibility should you want to include additional features:
+
+```html
+{% capture content %}{% include fancy-tables.liquid html=content %}{% endcapture %}
+<!-* Some other stuff... -->
+{{ content }}
+```
+
+**Alternative:** Replace `{{ content }}` directly:
+
+* Before:
+
+  ```html
+  <!-* Some other stuff... -->
+  {{ content }}
+  ```
+
+* After:
+
+  ```html
+  <!-* Some other stuff... -->
+  {% include fancy-tables.liquid html=content %}
+  ```
