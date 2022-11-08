@@ -76,15 +76,22 @@
               {% if prefix == '^^' %}{% continue %}{% endif %}
 
               {% assign lookbelow_index = forloop.parentloop.index | plus: offset %}
-              {% assign next_row_cells = lines[lookbelow_index] | replace: '\', '|' | strip | split: '|' %}
-              {% assign cell_below = next_row_cells[col_index] | strip %}
-              {% assign prefix = cell_below | slice: 0, 2 %}
-              {% if prefix == '^^' %}
-                {% comment %} TODO: Support more than 2 row spans {% endcomment %}
-                {% assign row_span = 2 %}
-              {% else %}
-                {% assign row_span = 1 %}
-              {% endif %}
+              {% assign contents_to_add = '' | split: '' %}
+              {% assign row_span = 1 %}
+              {% assign no_of_checks = forloop.parentloop.length | minus: forloop.parentloop.index %}
+              {% for i in (1..no_of_checks) %}
+                {% assign next_row_cells = lines[lookbelow_index] | replace: '\', '|' | strip | split: '|' %}
+                {% assign cell_below = next_row_cells[col_index] | strip %}
+                {% assign prefix = cell_below | slice: 0, 2 %}
+                {% if prefix == '^^' %}
+                  {% assign row_span = row_span | plus: 1 %}
+                  {% assign content_to_add = cell_below | slice: 2, cell_below.size | strip %}
+                  {% if content_to_add != '' %}{% assign contents_to_add = contents_to_add | push: content_to_add %}{% endif %}
+                {% else %}
+                  {% break %}
+                {% endif %}
+                {% assign lookbelow_index = lookbelow_index | plus: 1 %}
+              {% endfor %}
 
               {% assign alignment = alignments[cell_index] | upcase %}
               {% case alignment %}
@@ -97,10 +104,19 @@
               {% endcase %}
               <td colspan="{{ col_span }}" rowspan="{{ row_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="{{ align }}">
                 {{ cleaned }}
-                {% if row_span == 2 and cell_below.size > 2 %}<br>{{ cell_below | slice: 2, cell_below.size }}{% endif %}
+                {% if contents_to_add.size > 0 %}<br>{{ contents_to_add | join: '<br>' }}{% endif %}
               </td>
 
-              {% assign col_index = col_index | plus: col_span %}
+              {% assign carried_over = 0 %}
+              {% for i in (col_index..forloop.length) %}
+                {% assign sibling_index = i | plus: 1 %}
+                {% assign sibling = cells[sibling_index] | strip | slice: 0, 2 %}
+                {% if sibling != '^^' %}
+                  {% break %}
+                {% endif %}
+                {% assign carried_over = carried_over | plus: 1 %}
+              {% endfor %}
+              {% assign col_index = col_index | plus: col_span | plus: carried_over %}
               {% assign cell_index = cell_index | plus: 1 %}
             {% endfor %}
           </tr>
