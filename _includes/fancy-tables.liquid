@@ -46,7 +46,11 @@
           <tr>
             {% assign cells = row | strip | split: '|' %}
             {% for cell in cells offset:1 %}
-              <td>{{ cell | strip }}</td>
+              {% assign cleaned = cell | replace: '\', '' %}
+              {% assign col_span = cell.size | minus: cleaned.size | plus: 1 %}
+              <td colspan="{{ col_span }}">
+                {{ cleaned | strip }}
+              </td>
             {% endfor %}
           </tr>
         {% endfor %}
