@@ -48,6 +48,11 @@
             {% for cell in cells offset:1 %}
               {% assign cleaned = cell | replace: '\', '' %}
               {% assign col_span = cell.size | minus: cleaned.size | plus: 1 %}
+
+              {% assign lookbelow_index = forloop.parentloop.index | plus: offset %}
+              {% assign next_row_cells = lines[lookbelow_index] | replace: '\', '|' | strip | split: '|' %}
+              {% assign lookbelow_col_index = forloop.index0 | plus: col_span %}
+              {% assign cell_below = next_row_cells[lookbelow_col_index] %}
               <td colspan="{{ col_span }}">
                 {{ cleaned | strip }}
               </td>
