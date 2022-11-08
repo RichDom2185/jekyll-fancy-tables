@@ -48,12 +48,13 @@
               {% assign alignment = alignments[cell_index] | upcase %}
               {% case alignment %}
                 {% when "R" %}
-                  <th colspan="{{ col_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="right">
+                  {% assign align = 'right' %}
                 {% when "C" %}
-                  <th colspan="{{ col_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="center">
+                  {% assign align = 'center' %}
                 {% else %}
-                  <th colspan="{{ col_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="left">
+                  {% assign align = 'left' %}
               {% endcase %}
+              <th colspan="{{ col_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="{{ align }}">
                 {{ cleaned | strip }}
               </th>
 
@@ -86,12 +87,13 @@
               {% assign alignment = alignments[cell_index] | upcase %}
               {% case alignment %}
                 {% when "R" %}
-                  <td colspan="{{ col_span }}" rowspan="{{ row_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="right">
+                  {% assign align = 'right' %}
                 {% when "C" %}
-                  <td colspan="{{ col_span }}" rowspan="{{ row_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="center">
+                  {% assign align = 'center' %}
                 {% else %}
-                  <td colspan="{{ col_span }}" rowspan="{{ row_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="left">
+                  {% assign align = 'left' %}
               {% endcase %}
+              <td colspan="{{ col_span }}" rowspan="{{ row_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="{{ align }}">
                 {{ cleaned }}
               </td>
 
