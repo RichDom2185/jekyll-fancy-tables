@@ -48,3 +48,38 @@ Simply wrap your existing table in a fenced code block with the custom language 
     |--------|------------|---------|
     | Apple  | Potato     | Chicken |
     ```
+
+## Features
+
+### 1. Headerless Tables
+
+Simply chop off the header line:
+
+Before:
+
+```text
+| This      | table | has   | headers | :grin: |
+|-----------|-------|-------|---------|--------|
+| Sometimes | you   | don't | want    | them   |
+```
+
+After:
+
+```text
+|-----------|-------|-------|------|------|
+| Sometimes | you   | don't | want | them |
+```
+
+Result:
+
+<table>
+  <tbody>
+    <tr class="row1">
+      <td class="col1"> Sometimes</td>
+      <td class="col2"> you</td>
+      <td class="col3"> don't</td>
+      <td class="col4"> want</td>
+      <td class="col5"> them</td>
+    </tr>
+  </tbody>
+</table>
