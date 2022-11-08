@@ -32,10 +32,9 @@
           <tr>
             {% assign cells = lines.first | strip | split: '|' %}
             {% for cell in cells offset:1 %}
-              {% assign col_no = forloop.index | prepend: 'col' %}
               {% assign cleaned = cell | replace: '\', '' %}
               {% assign col_span = cell.size | minus: cleaned.size | plus: 1 %}
-              <th class="{{ col_no }}" colspan="{{ col_span }}">
+              <th colspan="{{ col_span }}">
                 {{ cleaned | strip }}
               </th>
             {% endfor %}
@@ -43,14 +42,14 @@
         </thead>
       {% endunless %}
       <tbody>
-        {% tablerow row in lines cols:1 offset:offset %}
-        {% assign cells = row | strip | split: '|' %}
-        {% for cell in cells offset:1 %}
-          {% assign col_no = forloop.index | plus: 1 | prepend: 'col' %}
-          {{ cell | strip }}</td>
-          {% unless forloop.last %}<td class="{{ col_no }}">{% endunless %}
+        {% for row in lines offset:offset %}
+          <tr>
+            {% assign cells = row | strip | split: '|' %}
+            {% for cell in cells offset:1 %}
+              <td>{{ cell | strip }}</td>
+            {% endfor %}
+          </tr>
         {% endfor %}
-        {% endtablerow %}
       </tbody>
     </table>
     {%- for tail in contents offset:1 -%}
