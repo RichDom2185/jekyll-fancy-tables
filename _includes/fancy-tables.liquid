@@ -23,7 +23,10 @@
       | strip
       | split: '</code></pre>'
     %}
-    {% capture text %}{% include capturehtml.liquid text=contents.first %}{% endcapture %}
+    {% assign data = contents.first | split: '```alignment' %}
+    {% assign text = data[0] %}
+    {% assign alignments = data[1] | replace: newline, '' | replace: ' ', '' | split: '' %}
+    {% capture text %}{% include capturehtml.liquid text=text %}{% endcapture %}
     {% assign lines = text | strip | split: newline %}
     {% assign check_first_row = lines.first | replace: ' ', '' | slice: 0, 3 %}
     {% if starts contains check_first_row %}
@@ -31,6 +34,8 @@
     {% else %}
       {% assign offset = 2 %}
     {% endif %}
+
+    {% assign cell_index = 0 %}
     <table>
       {% unless starts contains check_first_row %}
         <thead>
@@ -39,9 +44,20 @@
             {% for cell in cells offset:1 %}
               {% assign cleaned = cell | replace: '\', '' %}
               {% assign col_span = cell.size | minus: cleaned.size | plus: 1 %}
-              <th colspan="{{ col_span }}">
+
+              {% assign alignment = alignments[cell_index] | upcase %}
+              {% case alignment %}
+                {% when "R" %}
+                  <th colspan="{{ col_span }}" align="right">
+                {% when "C" %}
+                  <th colspan="{{ col_span }}" align="center">
+                {% else %}
+                  <th colspan="{{ col_span }}" align="left">
+              {% endcase %}
                 {{ cleaned | strip }}
               </th>
+
+              {% assign cell_index = cell_index | plus: 1 %}
             {% endfor %}
           </tr>
         </thead>
@@ -66,10 +82,21 @@
               {% else %}
                 {% assign row_span = 1 %}
               {% endif %}
-              <td colspan="{{ col_span }}" rowspan="{{ row_span }}">
+
+              {% assign alignment = alignments[cell_index] | upcase %}
+              {% case alignment %}
+                {% when "R" %}
+                  <td colspan="{{ col_span }}" rowspan="{{ row_span }}" align="right">
+                {% when "C" %}
+                  <td colspan="{{ col_span }}" rowspan="{{ row_span }}" align="center">
+                {% else %}
+                  <td colspan="{{ col_span }}" rowspan="{{ row_span }}" align="left">
+              {% endcase %}
                 {{ cleaned }}
               </td>
+
               {% assign col_index = col_index | plus: col_span %}
+              {% assign cell_index = cell_index | plus: 1 %}
             {% endfor %}
           </tr>
         {% endfor %}
