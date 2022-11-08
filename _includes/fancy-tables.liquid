@@ -30,14 +30,15 @@
       {% unless starts contains check_first_row %}
         <thead>
           <tr>
-            <th class="col1">
-              {% assign cells = lines.first | strip | split: '|' %}
-              {% for cell in cells offset:1 %}
-                {% assign col_no = forloop.index | plus: 1 | prepend: 'col' %}
-                {{ cell | strip }}</th>
-                {% unless forloop.last %}<th class="{{ col_no }}">{% endunless %}
-              {% endfor %}
-            </th>
+            {% assign cells = lines.first | strip | split: '|' %}
+            {% for cell in cells offset:1 %}
+              {% assign col_no = forloop.index | prepend: 'col' %}
+              {% assign cleaned = cell | replace: '\', '' %}
+              {% assign col_span = cell.size | minus: cleaned.size | plus: 1 %}
+              <th class="{{ col_no }}" colspan="{{ col_span }}">
+                {{ cleaned | strip }}
+              </th>
+            {% endfor %}
           </tr>
         </thead>
       {% endunless %}
