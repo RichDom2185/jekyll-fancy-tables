@@ -11,7 +11,7 @@ Benefits:
 * Fully compatible with GitHub Pages
 * Easily customisable to your needs
 
-## Usage
+## Add it to your site
 
 Simply include it in any of the layouts you want to add support for:
 
@@ -38,3 +38,13 @@ Simply include it in any of the layouts you want to add support for:
   <!-* Some other stuff... -->
   {% include fancy-tables.liquid html=content %}
   ```
+
+## Usage
+
+Simply wrap your existing table in a fenced code block with the custom language called `table`. Example:
+
+    ```table
+    | Fruits | Vegetables | Meat    |
+    |--------|------------|---------|
+    | Apple  | Potato     | Chicken |
+    ```
