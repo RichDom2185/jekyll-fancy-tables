@@ -93,7 +93,7 @@ Result:
       <td colspan="1" rowspan="1" data-nth-cell="2" align="left">you</td>
       <td colspan="1" rowspan="1" data-nth-cell="3" align="left">don’t</td>
       <td colspan="1" rowspan="1" data-nth-cell="4" align="left">want</td>
-      <td colspan="1" rowspan="1" data-nth-cell="5" align="left">them</td>
+      <td colspan="1" rowspan="1" data-nth-cell="5" align="left">headers</td>
     </tr>
   </tbody>
 </table>
