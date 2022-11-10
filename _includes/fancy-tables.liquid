@@ -55,7 +55,7 @@
                   {% assign align = 'left' %}
               {% endcase %}
               <th colspan="{{ col_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="{{ align }}">
-                {{- cleaned | strip -}}
+                {{- cleaned | strip | markdownify | split: '<p>' | shift | join: '<p>' | split: '</p>' | pop | join: '</p>' -}}
               </th>
 
               {%- assign cell_index = cell_index | plus: 1 -%}
@@ -85,7 +85,7 @@
                 {% assign prefix = cell_below | slice: 0, 2 -%}
                 {% if prefix == '^^' -%}
                   {% assign row_span = row_span | plus: 1 -%}
-                  {% assign content_to_add = cell_below | slice: 2, cell_below.size | strip -%}
+                  {% assign content_to_add = cell_below | slice: 2, cell_below.size | strip | markdownify | split: '<p>' | shift | join: '<p>' | split: '</p>' | pop | join: '</p>' -%}
                   {% if content_to_add != '' %}{% assign contents_to_add = contents_to_add | push: content_to_add %}{% endif -%}
                 {% else -%}
                   {% break %}
@@ -103,7 +103,7 @@
                   {% assign align = 'left' %}
               {% endcase %}
               <td colspan="{{ col_span }}" rowspan="{{ row_span }}" data-nth-cell="{{ cell_index | plus: 1 }}" align="{{ align }}">
-                {{- cleaned -}}
+                {{- cleaned | strip | markdownify | split: '<p>' | shift | join: '<p>' | split: '</p>' | pop | join: '</p>' -}}
                 {% if contents_to_add.size > 0 %}<br>{{ contents_to_add | join: '<br>' }}{% endif -%}
               </td>
 
