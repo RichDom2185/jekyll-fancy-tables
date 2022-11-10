@@ -59,3 +59,102 @@ Aaand... the markdown code below:
 ---
 
 ## Features
+
+### 1. Headerless Tables
+
+Simply chop off the header line:
+
+Before:
+
+```text
+| This      | table | looks | quite | ugly    |
+|-----------|-------|-------|-------|---------|
+| Sometimes | you   | don't | want  | headers |
+```
+
+After:
+
+```text
+|-----------|-------|-------|-------|---------|
+| Sometimes | you   | don't | want  | headers |
+```
+
+Result:
+
+```table
+|-----------|-------|-------|-------|---------|
+| Sometimes | you   | don't | want  | headers |
+```
+
+### 2. Column Span and Row Span
+
+#### Column Span
+
+* Works in table headers and table body
+* Simply "break" the column separator to span multiple columns
+
+  ```text
+  | OMG, I span 3 columns! \      \      |
+  |------------------------|------|------|
+  | That's...              | very | nice |
+  ```
+
+* Breaks don't have to be aligned to anything
+
+  ```text
+  | OMG, I span 3 columns! \\|
+  |------------|------|------|
+  | That's...  | very | nice |
+  ```
+
+* Non-blank cells will be joined together with a space
+
+  ```text
+  | OMG, I    \ span \ 3 columns! |
+  |-----------|------|------------|
+  | That's... | very | nice       |
+  ```
+
+The above 3 examples give the same result:
+
+```table
+| OMG, I span 3 columns! \\|
+|------------|------|------|
+| That's...  | very | nice |
+```
+
+#### Row Span
+
+* Only works for the table body
+
+* Simply prepend table cells with `^^`
+
+  ```text
+  |------------------------|---------|
+  | Look, I span two rows! | Looks   |
+  | ^^                     | pretty! |
+  ```
+
+  Result:
+
+  ```table
+  |------------------------|---------|
+  | Look, I span two rows! | Looks   |
+  | ^^                     | pretty! |
+  ```
+
+* Non-blank cells will be joined together with a line break
+
+  ```text
+  |---------------|---------|
+  | Look, I span  | Looks   |
+  | ^^ two rows!  | pretty! |
+  ```
+
+  Result:
+
+  ```table
+  |---------------|---------|
+  | Look, I span  | Looks   |
+  | ^^ two rows!  | pretty! |
+  ```

@@ -58,28 +58,122 @@ Simply chop off the header line:
 Before:
 
 ```text
-| This      | table | has   | headers | :grin: |
-|-----------|-------|-------|---------|--------|
-| Sometimes | you   | don't | want    | them   |
+| This      | table | looks | quite | ugly    |
+|-----------|-------|-------|-------|---------|
+| Sometimes | you   | don't | want  | headers |
 ```
 
 After:
 
 ```text
-|-----------|-------|-------|------|------|
-| Sometimes | you   | don't | want | them |
+|-----------|-------|-------|-------|---------|
+| Sometimes | you   | don't | want  | headers |
 ```
 
 Result:
 
 <table>
   <tbody>
-    <tr class="row1">
-      <td class="col1"> Sometimes</td>
-      <td class="col2"> you</td>
-      <td class="col3"> don't</td>
-      <td class="col4"> want</td>
-      <td class="col5"> them</td>
+    <tr>
+      <td colspan="1" rowspan="1" data-nth-cell="1" align="left">Sometimes</td>
+      <td colspan="1" rowspan="1" data-nth-cell="2" align="left">you</td>
+      <td colspan="1" rowspan="1" data-nth-cell="3" align="left">don’t</td>
+      <td colspan="1" rowspan="1" data-nth-cell="4" align="left">want</td>
+      <td colspan="1" rowspan="1" data-nth-cell="5" align="left">them</td>
     </tr>
   </tbody>
 </table>
+
+### 2. Column Span and Row Span
+
+#### Column Span
+
+* Works in table headers and table body
+* Simply "break" the column separator to span multiple columns
+
+  ```text
+  | OMG, I span 3 columns! \      \      |
+  |------------------------|------|------|
+  | That's...              | very | nice |
+  ```
+
+* Breaks don't have to be aligned to anything
+
+  ```text
+  | OMG, I span 3 columns! \\|
+  |------------|------|------|
+  | That's...  | very | nice |
+  ```
+
+* Non-blank cells will be joined together with a space
+
+  ```text
+  | OMG, I    \ span \ 3 columns! |
+  |-----------|------|------------|
+  | That's... | very | nice       |
+  ```
+
+The above 3 examples give the same result:
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3" data-nth-cell="1" align="left">OMG, I span 3 columns!</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="1" rowspan="1" data-nth-cell="2" align="left">That’s…</td>
+      <td colspan="1" rowspan="1" data-nth-cell="3" align="left">very</td>
+      <td colspan="1" rowspan="1" data-nth-cell="4" align="left">nice</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Row Span
+
+* Only works for the table body
+
+* Simply prepend table cells with `^^`
+
+  ```text
+  |------------------------|---------|
+  | Look, I span two rows! | Looks   |
+  | ^^                     | pretty! |
+  ```
+
+  Result:
+
+  <table>
+    <tbody>
+      <tr>
+        <td colspan="1" rowspan="2" data-nth-cell="1" align="left">Look, I span two rows!</td>
+        <td colspan="1" rowspan="1" data-nth-cell="2" align="left">Looks</td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1" data-nth-cell="3" align="left">pretty!</td>
+      </tr>
+    </tbody>
+  </table>
+
+* Non-blank cells will be joined together with a line break
+
+  ```text
+  |---------------|---------|
+  | Look, I span  | Looks   |
+  | ^^ two rows!  | pretty! |
+  ```
+
+  Result:
+
+  <table>
+    <tbody>
+      <tr>
+        <td colspan="1" rowspan="2" data-nth-cell="1" align="left">Look, I span <br>two rows! </td>
+        <td colspan="1" rowspan="1" data-nth-cell="2" align="left">Looks</td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1" data-nth-cell="3" align="left">pretty!</td>
+      </tr>
+    </tbody>
+  </table>
