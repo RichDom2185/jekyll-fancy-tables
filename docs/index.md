@@ -20,34 +20,19 @@ The following table is written entirely in (extended) Markdown with no HTML!
 
 {% capture table %}
 ```table
-| Check out this _fancy_ :sparkles: table!                                                                                 \\|
-|-----------------------|----------------------------------------------------------------------------------------|-----------|
-| One                   | Banana 1                                                                               | Orange 1  |
-| Three                 \                                                                                        | Orange 3  |
-| Four                  | Banana 4                                                                               | ^^        |
-| ^^                    | Banana 5                                                                               | Orange 5  |
-| Six                   | Banana 6                                                                               | Orange 6  |
-| Seven                 \                                                                                        | Orange 7  |
-| ^^ hi                 \                                                                                        | Orange 8  |
-| Nine                  | Hello,                                                                                 | Orange 9  |
-| Ten                   | ^^                                                                                     | Orange 10 |
-| Eleven                | ^^ _World?_                                                                            | Orange 11 |
-| Twelve                | Banana 12                                                                              | Orange 12 |
-| Thirteen              | Some really long text that ought to span multiple lines, and oh, it also has **markdown** styles! \|
+| Check out this _fancy_ :sparkles: table!                                               \\|
+|----------|-----------------------------------------------------------------|-------------|
+| Doe      | A deer, a female...                                             | Deer        |
+| Oh wait, \ this cell spans two columns! Here's an orange :tangerine:       | Two rows!   |
+| Four...  | Bananas forever :banana: :banana: :banana:                      | ^^          |
+| ^^       | Oops, forgot one more :banana:                                  \             |
+| Testing  | This is <strong>HTML bold</strong>, not markdown                | _center_    |
+| This row would be center-aligned                                          \| Hello,      |
+| ^^ Hey! How are you? :eyes:                                               \| ^^          |
+| Sponge?  | Imagination :rainbow:  &#124; ( • ) ( • ) &#124; :rainbow:      | ^^ _world?_ |
+| Thirteen | Some text I will break here,<br>and oh, it also has **markdown** styling!    \|
 ```alignment
-c
-LLL
-L r
-LL
-LL
-LLc
-c L
-L
-LLL
-L L
-L L
-lll
-lR
+c LLL Lr LL L LLc cL   ll lR
 ```
 
 {% endcapture %}
