@@ -1,11 +1,18 @@
 ---
 layout: demo
 ---
-<!--markdownlint-disable-file first-line-h1 -->
+<!-- markdownlint-disable-file first-line-h1 -->
 <!-- markdownlint-disable-file blanks-around-fences -->
 
 > {{ site.description }}
 {: style="font-size: 1.5em" }
+
+<!-- markdownlint-disable-next-line blanks-around-headers -->
+## Table of Contents
+{: .no_toc}
+
+* toc
+{:toc}
 
 ## Showcase
 
@@ -158,3 +165,50 @@ The above 3 examples give the same result:
   | Look, I span  | Looks   |
   | ^^ two rows!  | pretty! |
   ```
+
+### 3. Individual Cell Alignment
+
+* Simply add a section under `` ```alignment `` before closing the code block with `` ``` ``. Specify left, right, or center-aligned using `L`, `R`, or `C` respectively
+
+      ```table
+      | _For padding_ | _For padding_ | _For padding_ |
+      |---------------|---------------|---------------|
+      | left          |    center     |         right |
+      |    center     |         right | left          |
+      |         right | left          |    center     |
+      ```alignment
+      CCC
+      LCR
+      CRL
+      RLC
+      ```
+
+* Whitespace and capitalization do not matter
+
+      ```table
+      | _For padding_ | _For padding_ | _For padding_ |
+      |---------------|---------------|---------------|
+      | left          |    center     |         right |
+      |    center     |         right | left          |
+      |         right | left          |    center     |
+      ```alignment
+      cCClRrCrlrLc
+      ```
+
+The above 2 examples give the same result:
+
+```table
+| _For padding_ | _For padding_ | _For padding_ |
+|---------------|---------------|---------------|
+| left          |    center     |         right |
+|    center     |         right | left          |
+|         right | left          |    center     |
+```alignment
+cCClRrCrlrLc
+```
+
+## Additional styling
+
+Keeping to the spirit of Markdown, in order to not make the syntax too complicated, style-related syntax is limited to table cell alignment only (but you are welcome to request for features in the [issue tracker](https://github.com/RichDom2185/jekyll-fancy-tables/issues)).
+
+Having said that, the file also provides a `data-nth-cell` HTML attribute for each table cell (1-indexed), so you can style each individual cell using CSS/JS that way.

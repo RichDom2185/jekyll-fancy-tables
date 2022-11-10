@@ -177,3 +177,79 @@ The above 3 examples give the same result:
       </tr>
     </tbody>
   </table>
+
+### 3. Individual Cell Alignment
+
+* Simply add a section under `` ```alignment `` before closing the code block with `` ``` ``. Specify left, right, or center-aligned using `L`, `R`, or `C` respectively
+
+      ```table
+      | _For padding_ | _For padding_ | _For padding_ |
+      |---------------|---------------|---------------|
+      | left          |    center     |         right |
+      |    center     |         right | left          |
+      |         right | left          |    center     |
+      ```alignment
+      CCC
+      LCR
+      CRL
+      RLC
+      ```
+
+* Whitespace and capitalization do not matter
+
+      ```table
+      | _For padding_ | _For padding_ | _For padding_ |
+      |---------------|---------------|---------------|
+      | left          |    center     |         right |
+      |    center     |         right | left          |
+      |         right | left          |    center     |
+      ```alignment
+      cCClRrCrlrLc
+      ```
+
+The above 2 examples give the same result:
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="1" data-nth-cell="1" align="center">
+        <em>For padding</em>
+      </th>
+      <th colspan="1" data-nth-cell="2" align="center">
+        <em>For padding</em>
+      </th>
+      <th colspan="1" data-nth-cell="3" align="center">
+        <em>For padding</em>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="1" rowspan="1" data-nth-cell="4" align="left">left</td>
+      <td colspan="1" rowspan="1" data-nth-cell="5" align="right">center</td>
+      <td colspan="1" rowspan="1" data-nth-cell="6" align="right">right</td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1" data-nth-cell="7" align="center">center</td>
+      <td colspan="1" rowspan="1" data-nth-cell="8" align="right">right</td>
+      <td colspan="1" rowspan="1" data-nth-cell="9" align="left">left</td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1" data-nth-cell="10" align="right">right</td>
+      <td colspan="1" rowspan="1" data-nth-cell="11" align="left">left</td>
+      <td colspan="1" rowspan="1" data-nth-cell="12" align="center">center</td>
+    </tr>
+  </tbody>
+</table>
+
+## Others
+
+### Bugs
+
+Feel free to report any bugs in the [issue tracker](https://github.com/RichDom2185/jekyll-fancy-tables/issues).
+
+### Additional styling
+
+Keeping to the spirit of Markdown, in order to not make the syntax too complicated, style-related syntax is limited to table cell alignment only (but you are welcome to request for features in the [issue tracker](https://github.com/RichDom2185/jekyll-fancy-tables/issues)).
+
+Having said that, the file also provides a `data-nth-cell` HTML attribute for each table cell (1-indexed), so you can style each individual cell using CSS/JS that way.
