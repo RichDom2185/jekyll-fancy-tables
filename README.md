@@ -65,6 +65,8 @@ This syntax was chosen for a couple reaons:
 
 ## Features
 
+_Note: For all examples below, where not specified, the markup is wrapped with `` ```table `` as per the usage section above._
+
 ### 1. Headerless Tables
 
 Simply chop off the header line:
