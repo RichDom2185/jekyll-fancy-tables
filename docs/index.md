@@ -7,6 +7,8 @@ layout: demo
 > {{ site.description }}
 {: style="font-size: 1.5em" }
 
+For the full guide (usages, etc.), view the project on [GitHub]({{ site.github.repository_url }}).
+
 <!-- markdownlint-disable-next-line blanks-around-headers -->
 ## Table of Contents
 {: .no_toc}
@@ -51,6 +53,9 @@ Aaand... the markdown code below:
 ---
 
 ## Features
+
+<!-- markdownlint-disable-next-line no-inline-html -->
+_Note: For all examples below, where not specified, the markup is wrapped with <code>```table</code> as per the usage section above._
 
 ### 1. Headerless Tables
 
@@ -153,7 +158,8 @@ The above 3 examples give the same result:
 
 ### 3. Individual Cell Alignment
 
-* Simply add a section under `` ```alignment `` before closing the code block with `` ``` ``. Specify left, right, or center-aligned using `L`, `R`, or `C` respectively
+<!-- markdownlint-disable-next-line no-inline-html -->
+* Simply add a section under <code>```alignment</code> before closing the code block with <code>```</code>. Specify left, right, or center-aligned using `L`, `R`, or `C` respectively
 
       ```table
       | _For padding_ | _For padding_ | _For padding_ |
