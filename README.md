@@ -22,6 +22,10 @@ Copy the following files to your site's `_includes` folder:
 
 ### Step 2: Include it in your site
 
+You can render fancy tables in your Jekyll site using one of two, non-mutually-exclusive ways:
+
+#### As a HTML layout
+
 Simply include it in any of the layouts you want to add support for:
 
 **Recommended:** Reassign the layout's `content` variable. This approach ensures compatibility should you want to include additional features:
@@ -47,6 +51,10 @@ Simply include it in any of the layouts you want to add support for:
   <!-* Some other stuff... -->
   {% include fancy-tables.liquid html=content %}
   ```
+
+#### As an Include Expression
+
+_See [Advanced Usage: Rendering Individual Tables Only](#rendering-individual-tables-only)._
 
 ## Usage
 
@@ -257,6 +265,58 @@ The above 2 examples give the same result:
     </tr>
   </tbody>
 </table>
+
+## Advanced Usage
+
+### Rendering Individual Tables Only
+
+<details>
+  <summary><strong>Why would you use this?</strong></summary>
+
+  This can be useful together with some creative tricks like using [text substitution for lists in markdown tables](https://gist.github.com/RichDom2185/26166ba51cf432b90a0afb04993d0640).
+
+</details>
+
+If you only want to render certain tables, the extension also supports rendering directly from markdown. Simply include the following markup in your source file:
+
+    {% capture table %}
+    ```table
+    | The Do-Re-Mi Song              \\|
+    |-----|---------------------|------|
+    | Doe | A deer, a female... | Deer |
+    ```alignment
+    c
+    ```
+    {% endcapture %}
+
+    {% include fancy-tables.liquid markdown=table %}
+
+Note the use of the `markdown` argument instead of `html`.
+
+Result:
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3" data-nth-cell="1" align="center">The Do-Re-Mi Song</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="1" rowspan="1" data-nth-cell="2" align="left">Doe</td>
+      <td colspan="1" rowspan="1" data-nth-cell="3" align="left">A deer, a female…</td>
+      <td colspan="1" rowspan="1" data-nth-cell="4" align="left">Deer</td>
+    </tr>
+  </tbody>
+</table>
+
+If used together with [the HTML layout](#as-a-html-layout), you will have to wrap the include statement in a `div` element to prevent the markdown preprocessor from parsing it again:
+
+```html
+<div markdown="0">{% include fancy-tables.liquid markdown=table %}</div>
+```
+
+Note: depending on your Jekyll site configuration, the `markdown="0"` attribute may or may not be needed.
 
 ## Others
 
