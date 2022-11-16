@@ -32,7 +32,7 @@ Simply include it in any of the layouts you want to add support for:
 
 ```html
 {% capture content %}{% include fancy-tables.liquid html=content %}{% endcapture %}
-<!-* Some other stuff... -->
+<!-- Some other stuff... -->
 {{ content }}
 ```
 
@@ -41,14 +41,14 @@ Simply include it in any of the layouts you want to add support for:
 * Before:
 
   ```html
-  <!-* Some other stuff... -->
+  <!-- Some other stuff... -->
   {{ content }}
   ```
 
 * After:
 
   ```html
-  <!-* Some other stuff... -->
+  <!-- Some other stuff... -->
   {% include fancy-tables.liquid html=content %}
   ```
 
