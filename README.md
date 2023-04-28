@@ -228,7 +228,7 @@ The above 3 examples give the same result:
       |    center     |         right | left          |
       |         right | left          |    center     |
       ```alignment
-      cCClRrCrlrLc
+      cCClCrCrlrLc
       ```
 
 The above 2 examples give the same result:
@@ -250,7 +250,7 @@ The above 2 examples give the same result:
   <tbody>
     <tr>
       <td colspan="1" rowspan="1" data-nth-cell="4" align="left">left</td>
-      <td colspan="1" rowspan="1" data-nth-cell="5" align="right">center</td>
+      <td colspan="1" rowspan="1" data-nth-cell="5" align="center">center</td>
       <td colspan="1" rowspan="1" data-nth-cell="6" align="right">right</td>
     </tr>
     <tr>

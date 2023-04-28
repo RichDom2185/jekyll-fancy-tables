@@ -183,7 +183,7 @@ The above 3 examples give the same result:
       |    center     |         right | left          |
       |         right | left          |    center     |
       ```alignment
-      cCClRrCrlrLc
+      cCClCrCrlrLc
       ```
 
 The above 2 examples give the same result:
@@ -195,7 +195,7 @@ The above 2 examples give the same result:
 |    center     |         right | left          |
 |         right | left          |    center     |
 ```alignment
-cCClRrCrlrLc
+cCClCrCrlrLc
 ```
 
 ## Additional styling
